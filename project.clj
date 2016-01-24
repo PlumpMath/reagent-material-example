@@ -8,17 +8,21 @@
 
   :clean-targets ^{:protect false} ["resources/public/js"
                                     "resources/public/css"
-                                    "target"
+                                    :target
                                     "out"
                                     "figwheel_server.log"]
 
   :cljsbuild
   {:builds [{:id "dev"
              :source-paths ["src"]
-             :figwheel true
+             :figwheel {:http-server-root "public" ;; this will be in resources/
+                        :server-port 3449
+                        :css-dirs ["resources/public/css"]
+                        :open-file-command "scripts/emacsclient_path_lineno.sh"}
              :compiler {:main "admin-v2b.core"
-                        ;;:output-to "resources/public/js/main.js"
-                        ;;:output-dir "resources/public/js/out"
+                        :output-to "resources/public/js/main.js"
+                        :output-dir "resources/public/js/out"
+                        :asset-path "js/out"
                         :optimizations :none}}]}
 
   :profiles
@@ -45,6 +49,7 @@
                          cider.nrepl.middleware.undef/wrap-undef
                          ]}
          :dependencies [[com.cemerick/piggieback "0.2.1"]
+                        ;;[figwheel-sidecar "0.5.0-1"]
                         [cider/cider-nrepl "0.10.1"]
                         [org.clojure/tools.nrepl "0.2.10"]]
 
