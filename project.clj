@@ -1,5 +1,6 @@
 (defproject admin-v2b "0.1.0-SNAPSHOT"
   :min-lein-version "2.5.3"
+
   :plugins [[lein-figwheel "0.5.0-4"]]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
@@ -20,7 +21,6 @@
 
              :nrepl-port 7888
              :nrepl-middleware ["cider.nrepl/cider-middleware"
-                                ;;"refactor-nrepl.middleware/wrap-refactor"
                                 "cemerick.piggieback/wrap-cljs-repl"]
 
              :open-file-command "emacsclient"}
@@ -36,16 +36,8 @@
                         :optimizations :none}}]}
 
   :profiles
-  {:repl {:plugins [[cider/cider-nrepl "0.11.0-SNAPSHOT"]]}
-   :dev {:repl-options { ;;:init-ns admin-v2b.core
-                        :nrepl-middleware
-                        [cemerick.piggieback/wrap-cljs-repl]}
-         :dependencies [[com.cemerick/piggieback "0.2.1"]
+  {:dev {
+         :dependencies [[org.clojure/tools.nrepl "0.2.12"]
+                        [com.cemerick/piggieback "0.2.1"]
                         [figwheel-sidecar "0.5.0-SNAPSHOT"]
-                        [cider/cider-nrepl "0.11.0-SNAPSHOT"]]
-
-         }
-
-   }
-
-  )
+                        [cider/cider-nrepl "0.11.0-SNAPSHOT"]]}})

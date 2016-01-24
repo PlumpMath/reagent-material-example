@@ -18,7 +18,6 @@
 
 
 
-
 #_ (doseq [i (range 3)] (js/alert (str "Hello World " i)))
 
 #_ (reduce + (range 1 100))
