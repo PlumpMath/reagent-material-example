@@ -9,7 +9,7 @@
   :clean-targets ^{:protect false} [:target
                                     "resources/public/js"
                                     "resources/public/css"
-                                    "logs"]
+                                    "figwheel_server.log"]
 
 
   :figwheel {
@@ -18,7 +18,6 @@
               :css-dirs ["resources/public/css"]
               :server-port 3450
               :server-ip "0.0.0.0"
-              :server-logfile "logs/figwheel_server.log"
               :websocket-host :js-client-host
               :nrepl-port 7888
               :nrepl-middleware ["cider.nrepl/cider-middleware"
