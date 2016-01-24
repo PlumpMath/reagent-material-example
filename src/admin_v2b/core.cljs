@@ -5,15 +5,13 @@
 #_ (do (use 'figwheel-sidecar.repl-api) (cljs-repl))
 
 (enable-console-print!)
-(println "hello")
 
-(defonce st (r/atom {:rerender-flip-bit true}))
+(defonce st (r/atom 0))
 
-(defn hello-world []
-  [:h1 "hello: " (str (:rerender-flip-bit @st))])
+(defn app []
+  [:h1 {:on-click #(swap! st inc)} "count: " @st])
 
-(swap! st complement)
-(r/render-component [hello-world] (gdom/getElement "app"))
+(r/render-component [app] (gdom/getElement "app"))
 
 
 
