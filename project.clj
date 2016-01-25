@@ -4,12 +4,18 @@
   :plugins [[lein-figwheel "0.5.0-4"]]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [reagent "0.6.0-alpha"]
-                 [org.clojure/clojurescript "1.7.228"]]
+                 [org.clojure/clojurescript "1.7.228"]
+                 [reagent "0.6.0-alpha" :exclusions [cljsjs/react]]
+                 ;;[secretary "1.2.3"]
+                 ;;[com.stuartsierra/component "0.2.3"]
+                 ;;[org.clojure/core.cache "0.6.4"]
+                 ;;[org.clojure/core.match "0.3.0-alpha4"]
+                 ;;[org.clojure/core.async "0.2.374"]
+                 ]
 
-  :clean-targets ^{:protect false} [:target
-                                    "resources/public/js"
-                                    "resources/public/css"
+  :clean-targets ^{:protect false} [:target-path
+                                    [:cljsbuild :builds "dev" :compiler :output-to]
+                                    [:cljsbuild :builds "dev" :compiler :output-dir]
                                     "figwheel_server.log"]
 
 
@@ -28,7 +34,8 @@
   {:builds [{:id "dev"
              :source-paths ["src"]
              :figwheel {:websocket-host :js-client-host}
-             :compiler {:main "admin-v2b.core"
+             :compiler {:preamble ["resources/public/vendor-js/material-ui/material.js"]
+                        :main "admin-v2b.core"
                         :output-to "resources/public/js/main.js"
                         :output-dir "resources/public/js/out"
                         :asset-path "js/out"
