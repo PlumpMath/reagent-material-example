@@ -17,7 +17,6 @@
              :css-dirs ["resources/public/css"]
              :server-port 3449
              :server-ip "0.0.0.0"
-             :websocket-host :js-client-host
 
              :nrepl-port 7888
              :nrepl-middleware ["cider.nrepl/cider-middleware"
@@ -28,7 +27,7 @@
   :cljsbuild
   {:builds [{:id "dev"
              :source-paths ["src"]
-             :figwheel true
+             :figwheel {:websocket-host :js-client-host}
              :compiler {:main "admin-v2b.core"
                         :output-to "resources/public/js/main.js"
                         :output-dir "resources/public/js/out"
